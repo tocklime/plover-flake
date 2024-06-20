@@ -1,4 +1,4 @@
-{ ruamel-yaml, prompt-toolkit, pysdl2, setuptools-scm, utils }:
+{ ruamel-yaml, prompt-toolkit, pysdl2, setuptools-scm, utils, requests-futures, requests-cache, readme-renderer, pkginfo, pip, cmarkgfm, wheel }:
 self: super: {
   plover_yaml_dictionary = super.plover_yaml_dictionary.overrideAttrs (old: {
     propagatedBuildInputs = [ ruamel-yaml ];
@@ -15,5 +15,11 @@ self: super: {
   });
   plover_dict_commands = super.plover_dict_commands.overrideAttrs (old: {
     propagatedBuildInputs = [ setuptools-scm ];
+  });
+  plover_plugins_manager = super.plover_plugins_manager.overrideAttrs (old: {
+    propagatedBuildInputs = [ requests-futures requests-cache readme-renderer pkginfo pip cmarkgfm wheel ];
+    doCheck = false;
+    doInstallCheck = false;
+
   });
 }
